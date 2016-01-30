@@ -16,6 +16,6 @@ The idea for hathor came about from a conversation with [a friend](https://twitt
 
 ## Author
 
-Name: Nic Roland
-Email: nicroland9@gmail.com
+Name: Nic Roland<br>
+Email: nicroland9@gmail.com<br>
 Twitter: @nicr9_
