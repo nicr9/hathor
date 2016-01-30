@@ -6,12 +6,14 @@ import (
 
 // TEST CONFIG
 var config string = `
-podcast.__init__:
+podcastinit:
   source: "http://podcastinit.podbean.com/feed/"
+  download: latest
 `
 
 type Feed struct {
-	Source string "source"
+	Source   string "source"
+	Download string "download,omitempty"
 }
 
 func GetFeeds() (feeds map[string]Feed, err error) {
