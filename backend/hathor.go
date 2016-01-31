@@ -8,18 +8,16 @@ import (
 )
 
 func download(episode hathor.Episode) {
-	fmt.Printf(" - %+v\n", episode)
+	fmt.Printf("%s - Downloading '%s'\n", episode.Podcast, episode.Title)
 }
 
 func main() {
 	feeds, err := hathor.GetFeeds()
 	if err != nil {
-		fmt.Println(err)
+		fmt.Printf("[e] %s\n", err)
 		return
 	}
-	fmt.Println("--- Feeds ---")
 	for key := range feeds {
-		fmt.Printf(" * %s\n", key)
 
 		go func(uri string, timeout int) {
 			rssfeed := hathor.NewRssFeed(key, feeds[key])
@@ -29,7 +27,9 @@ func main() {
 					fmt.Printf("[e] %s: %s\n", err, uri)
 					return
 				}
-				<-time.After(time.Duration(feed.SecondsTillUpdate() * 1e9))
+				update := feed.SecondsTillUpdate()
+				fmt.Printf("%s - Updating again in %d seconds\n", key, update)
+				<-time.After(time.Duration(update) * time.Second)
 			}
 		}(feeds[key].Source, 5)
 

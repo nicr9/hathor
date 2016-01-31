@@ -27,11 +27,11 @@ func NewRssFeed(key string, config Feed) RssFeed {
 }
 
 func (r RssFeed) Channels(feed *rss.Feed, newchannels []*rss.Channel) {
-	fmt.Printf(" - %d new channel(s) in %s\n", len(newchannels), feed.Url)
+	fmt.Printf("%s - %d new channel(s)\n", r.Key, len(newchannels))
 }
 
 func (r RssFeed) Items(feed *rss.Feed, ch *rss.Channel, newitems []*rss.Item) {
-	fmt.Printf(" - %d new item(s) in %s\n", len(newitems), feed.Url)
+	fmt.Printf("%s - %d new item(s)\n", r.Key, len(newitems))
 
 	switch r.Config.Download {
 	case "latest":
