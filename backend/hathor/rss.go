@@ -3,16 +3,39 @@ package hathor
 import (
 	"fmt"
 	rss "github.com/jteeuwen/go-pkg-rss"
+	"net/url"
+	"path"
 )
 
+var CachePath string = "/tmp/hathor"
+
 type Episode struct {
-	Podcast string
-	Title   string
-	Url     string
+	Key      string
+	Title    string
+	Url      string
+	DirPath  string
+	FilePath string
 }
 
 func NewEpisode(rssfeed RssFeed, item *rss.Item) Episode {
-	return Episode{rssfeed.Key, item.Title, item.Enclosures[0].Url}
+	key := rssfeed.Key
+	title := item.Title
+	uri := item.Enclosures[0].Url
+
+	// Parse uri and determine path to save file locally
+	dirPath, filePath := "", ""
+	u, err := url.Parse(uri)
+	if err != nil {
+		fmt.Printf("[e] Failed to parse uri (podcast:%s, episode:%s)\n", key, title)
+	} else {
+		resourcePath := u.Path
+		fileName := path.Base(resourcePath)
+		dirPath = path.Join(CachePath, key)
+		filePath = path.Join(dirPath, fileName)
+	}
+
+	result := Episode{rssfeed.Key, item.Title, uri, dirPath, filePath}
+	return result
 }
 
 var episodes = make(chan Episode)

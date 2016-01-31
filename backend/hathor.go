@@ -8,7 +8,7 @@ import (
 )
 
 func download(episode hathor.Episode) {
-	fmt.Printf("%s - Downloading '%s'\n", episode.Podcast, episode.Title)
+	fmt.Printf("%s - Downloading '%s'\n", episode.Key, episode.Title)
 }
 
 func main() {
