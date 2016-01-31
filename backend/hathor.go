@@ -4,11 +4,16 @@ import (
 	"fmt"
 	rss "github.com/jteeuwen/go-pkg-rss"
 	"github.com/nicr9/hathor/backend/hathor"
+	"os"
 	"time"
 )
 
 func download(episode hathor.Episode) {
 	fmt.Printf("%s - Downloading '%s'\n", episode.Key, episode.Title)
+	err := os.MkdirAll(episode.DirPath, 0755)
+	if err != nil {
+		fmt.Printf("[e] Couldn't make dir: %s\n -> %s", episode.DirPath, err)
+	}
 }
 
 func main() {
