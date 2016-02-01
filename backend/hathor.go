@@ -68,8 +68,8 @@ func main() {
 				<-time.After(time.Duration(update) * time.Second)
 			}
 		}(feeds[key].Source, 5)
-
-		hathor.ProcessEpisodes(download)
 	}
 
+	// Wait for episodes to arrive and download 'em
+	hathor.ProcessEpisodes(download)
 }
