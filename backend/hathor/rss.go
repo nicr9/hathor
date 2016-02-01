@@ -3,6 +3,7 @@ package hathor
 import (
 	"fmt"
 	rss "github.com/jteeuwen/go-pkg-rss"
+	"net/http"
 	"net/url"
 	"path"
 )
@@ -73,4 +74,9 @@ func ProcessEpisodes(process func(Episode)) {
 		res := <-episodes
 		go process(res)
 	}
+}
+
+func ServeFeeds() {
+	fmt.Println("hathor - starting server...")
+	http.ListenAndServe(":8080", http.FileServer(http.Dir(CachePath)))
 }

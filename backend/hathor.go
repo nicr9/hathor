@@ -71,5 +71,6 @@ func main() {
 	}
 
 	// Wait for episodes to arrive and download 'em
-	hathor.ProcessEpisodes(download)
+	go hathor.ProcessEpisodes(download)
+	hathor.ServeFeeds()
 }
