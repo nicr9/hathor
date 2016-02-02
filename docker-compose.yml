@@ -1,2 +1,9 @@
+data:
+  image: alpine:latest
+  volumes:
+    - "/tmp/hathor"
+  entrypoint: "true"
 backend:
   build: ./backend
+  volumes_from:
+    - data
