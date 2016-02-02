@@ -59,6 +59,7 @@ func (r RssFeed) Items(feed *rss.Feed, ch *rss.Channel, newitems []*rss.Item) {
 
 	switch r.Config.Download {
 	case "latest":
+		// TODO: "latest" should only count when a podcast is first added
 		newitems = []*rss.Item{newitems[0]}
 	}
 
