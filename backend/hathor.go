@@ -48,15 +48,15 @@ func download(episode hathor.Episode) {
 }
 
 func main() {
-	feeds, err := hathor.GetFeeds()
+	config, err := hathor.GetConfig()
 	if err != nil {
 		fmt.Printf("[e] %s\n", err)
 		return
 	}
-	for key := range feeds {
+	for key := range config {
 
 		go func(uri string, timeout int) {
-			rssfeed := hathor.NewRssFeed(key, feeds[key])
+			rssfeed := hathor.NewRssFeed(key, config[key])
 			feed := rss.New(timeout, true, rssfeed.Channels, rssfeed.Items)
 			for {
 				if err := feed.Fetch(uri, nil); err != nil {
@@ -67,7 +67,7 @@ func main() {
 				fmt.Printf("%s - Updating again in %d seconds\n", key, update)
 				<-time.After(time.Duration(update) * time.Second)
 			}
-		}(feeds[key].Source, 5)
+		}(config[key].Source, 5)
 	}
 
 	// Wait for episodes to arrive and download 'em

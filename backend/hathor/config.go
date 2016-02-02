@@ -16,9 +16,9 @@ type Feed struct {
 	Download string "download,omitempty"
 }
 
-func GetFeeds() (feeds map[string]Feed, err error) {
-	feeds = make(map[string]Feed)
-	err = yaml.Unmarshal([]byte(config), &feeds)
+func GetConfig() (config map[string]Feed, err error) {
+	config = make(map[string]Feed)
+	err = yaml.Unmarshal([]byte(config), &config)
 
 	return
 }
