@@ -80,3 +80,7 @@ func ServeFeeds() {
 	fmt.Println("hathor - starting server...")
 	http.ListenAndServe(":8080", http.FileServer(http.Dir(CachePath)))
 }
+
+func UpdateFeed(episode Episode) {
+	fmt.Println("%s - Updating feed", episode.Key)
+}

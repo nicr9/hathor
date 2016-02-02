@@ -18,6 +18,7 @@ func download(episode hathor.Episode) {
 	}
 
 	// Only download if it's not already cached
+	// TODO: Is there a way to continue a download if it gets interrupted?
 	if _, err := os.Stat(episode.FilePath); os.IsNotExist(err) {
 		fmt.Printf("%s - Downloading '%s'\n", episode.Key, episode.Title)
 
@@ -45,6 +46,8 @@ func download(episode hathor.Episode) {
 		}
 		fmt.Printf("%s - Finished '%s'\n", episode.Key, episode.Title)
 	}
+
+	hathor.UpdateFeed(episode)
 }
 
 func main() {
