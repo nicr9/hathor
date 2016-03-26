@@ -1,4 +1,4 @@
-package hathor
+package main
 
 import (
 	"fmt"
@@ -83,5 +83,5 @@ func ServeFeeds() {
 }
 
 func UpdateFeed(episode Episode) {
-	fmt.Println("%s - Updating feed", episode.Key)
+	fmt.Printf("%s - Updating feed", episode.Key)
 }

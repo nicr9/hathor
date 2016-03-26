@@ -4,6 +4,6 @@ data:
     - "/tmp/hathor"
   entrypoint: "true"
 backend:
-  build: ./backend
+  build: .
   volumes_from:
     - data

@@ -1,11 +1,11 @@
-package hathor
+package main
 
 import (
 	"gopkg.in/yaml.v2"
 )
 
 // TEST CONFIG
-var config string = `
+var data string = `
 podcastinit:
   source: "http://podcastinit.podbean.com/feed/"
   download: latest
@@ -18,7 +18,7 @@ type Feed struct {
 
 func GetConfig() (config map[string]Feed, err error) {
 	config = make(map[string]Feed)
-	err = yaml.Unmarshal([]byte(config), &config)
+	err = yaml.Unmarshal([]byte(data), &config)
 
 	return
 }
